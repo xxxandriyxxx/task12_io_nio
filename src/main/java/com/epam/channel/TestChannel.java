@@ -26,7 +26,7 @@ public class TestChannel {
     }
 
     @SuppressWarnings("resource")
-    private static void copyData(String sourceFilePath, String destinationFilePath) throws IOException {
+    public static void copyData(String sourceFilePath, String destinationFilePath) throws IOException {
         // Path Of The Input Text File
         FileInputStream input = new FileInputStream(sourceFilePath);
         ReadableByteChannel source = input.getChannel();

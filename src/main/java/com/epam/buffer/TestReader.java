@@ -4,10 +4,10 @@ import java.io.*;
 
 public class TestReader {
 
-    public static void testUsualReader() throws IOException {
+    public static void testUsualReader(String filePath) throws IOException {
         int count = 0;
         System.out.println("Test usual reader");
-        InputStream inputStream = new FileInputStream("TestFile.pdf");
+        InputStream inputStream = new FileInputStream(filePath);
         int data = inputStream.read();
         while (data != -1) {
             data = inputStream.read();
@@ -19,12 +19,12 @@ public class TestReader {
         System.out.println("------------------------------");
     }
 
-    public static void testBufferedReader() throws IOException {
+    public static void testBufferedReader(String filePath) throws IOException {
         int count = 0;
         System.out.println("Test buffered reader");
         DataInputStream inputStream = new DataInputStream(
                 new BufferedInputStream(
-                        new FileInputStream("testFile.txt")));
+                        new FileInputStream(filePath)));
         try {
             while (true) {
                 byte b = inputStream.readByte();
@@ -39,7 +39,7 @@ public class TestReader {
         System.out.println("------------------------------");
     }
 
-    public static void testBufferedReaderWithBufSize() throws IOException {
+    public static void testBufferedReaderWithBufSize(String filePath) throws IOException {
         int count = 0;
         int bufSize = 1024 * 1024; //1MB
         int bufferSize;
@@ -48,7 +48,7 @@ public class TestReader {
             System.out.println("Test reader with " + i + " MB buffer");
             DataInputStream inputStream1 = new DataInputStream(
                     new BufferedInputStream(
-                            new FileInputStream("TestFile.pdf"), bufferSize));
+                            new FileInputStream(filePath), bufferSize));
             count = 0;
             try {
                 while (true) {
