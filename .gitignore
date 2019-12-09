@@ -8,8 +8,4 @@ log/
 target/
 
 # Resource files
-*.pdf
-*.txt
-*.dat
-*.log
-
+resourceFiles/
