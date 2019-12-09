@@ -7,7 +7,8 @@
 log/
 target/
 
-# Resources files
+# Resource files
 *.pdf
 *.txt
+*.dat
 
