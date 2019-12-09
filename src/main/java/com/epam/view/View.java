@@ -8,11 +8,17 @@ import com.epam.droid.Battery;
 import com.epam.droid.Droid;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class View {
+
+    private Logger logger = LogManager.getLogger(View.class);
 
     private Map<String, String> menu;
     private Map<String, Printable> methodsMenu;
@@ -43,7 +49,7 @@ public class View {
             out.writeObject(droid);
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(Arrays.toString(e.getStackTrace()));
         }
         Droid.staticValue = 12345;
         try {
@@ -53,27 +59,40 @@ public class View {
             input.close();
             System.out.println(droidFromFile);
         } catch (IOException | ClassNotFoundException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
         }
     }
 
-    private void testReader() throws IOException {
-        TestReader.testUsualReader("resourceFiles\\testFile.txt");
-        TestReader.testBufferedReader("resourceFiles\\testFile.pdf");
-        TestReader.testBufferedReaderWithBufSize("resourceFiles\\testFile.pdf");
+    private void testReader() {
+        try {
+            TestReader.testUsualReader("resourceFiles\\testFile.txt");
+            TestReader.testBufferedReader("resourceFiles\\testFile.pdf");
+            TestReader.testBufferedReaderWithBufSize("resourceFiles\\testFile.pdf");
+        } catch (IOException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
+        }
     }
 
-    private void printComments() throws IOException {
-        FindComments.printComments("resourceFiles\\fileComments.txt");
+    private void printComments() {
+        try {
+            FindComments.printComments("resourceFiles\\fileComments.txt");
+        } catch (IOException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
+        }
     }
 
     private void displayDirectoryContents() {
         Directory.showContents("D:\\Install\\_Install 2");
     }
 
-    private void testChannel() throws IOException {
-        TestChannel.tryChannel("resourceFiles\\testFile.txt");
-        System.out.println("\n---------------------");
-        TestChannel.copyData("resourceFiles\\testFile1.txt", "resourceFiles\\testFile2.txt");
+    private void testChannel() {
+        try {
+            TestChannel.tryChannel("resourceFiles\\testFile.txt");
+            System.out.println("\n---------------------");
+            TestChannel.copyData("resourceFiles\\testFile1.txt", "resourceFiles\\testFile2.txt");
+        } catch (IOException e) {
+            logger.error(Arrays.toString(e.getStackTrace()));
+        }
     }
 
     private void outputMenu() {
@@ -93,6 +112,7 @@ public class View {
             try {
                 methodsMenu.get(keyMenu).print();
             } catch (Exception e) {
+                logger.error(Arrays.toString(e.getStackTrace()));
             }
         } while (!keyMenu.equals("Q"));
     }
